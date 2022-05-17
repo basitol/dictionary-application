@@ -15,16 +15,15 @@ const darkTheme = createTheme({
 });
 
 function App() {
-  const [words, setWords] = useState([]); // words is an array of objects
-  // const [word, setWord] = useState("");
   const [meanings, setMeanings] = useState([]);
+  const [words, setWords] = useState(""); // words is an array of objects
+  const [category, setCategory] = useState("en");
 
   const dictionaryApi = async () => {
     try {
       const data = await axios.get(
         "https://api.dictionaryapi.dev/api/v2/entries/en/plane"
       );
-      // console.log(data);
       setMeanings(data.data);
     } catch (error) {
       console.log(error);
@@ -46,8 +45,12 @@ function App() {
         maxWidth="md"
         style={{ display: "flex", flexDirection: "column", height: "100vh" }}
       >
-        <Header />
-        Helllo world
+        <Header
+          category={category}
+          setCategory={setCategory}
+          words={words}
+          setWords={setWords}
+        />
       </Container>
     </div>
   );
