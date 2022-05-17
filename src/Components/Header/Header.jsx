@@ -7,7 +7,7 @@ import {
 import { languages } from "../../data";
 import "./Header.css";
 
-const Header = () => {
+const Header = ({ category, setCategory, words, setWords }) => {
   const darkTheme = createMuiTheme({
     palette: {
       mode: "dark",
@@ -17,23 +17,34 @@ const Header = () => {
     },
   });
 
+  const handleChange = (language) => {
+    setCategory(language);
+    setWords("");
+  };
+
   return (
     <div className="header">
-      <h1 className="title">Dictionary</h1>
+      <h1 className="title">{words ? words : "Dictionary"}</h1>
       <div className="inputs">
         <ThemeProvider theme={darkTheme}>
-          <TextField id="standard-basic" label="Standard" variant="standard" />
           <TextField
-            id="outlined-select-currency"
+            className="search"
+            id="standard-basic"
+            label="Standard"
+            variant="standard"
+            value={words}
+            onChange={(e) => setWords(e.target.value)} // setWords is a function
+          />
+          <TextField
             select
-            label="Select Language"
-            // value={currency}
-            // onChange={handleChange}
-            helperText="Please select your language"
+            className="select"
+            label="Language"
+            value={category}
+            onChange={(e) => handleChange(e.target.value)}
           >
             {languages.map((language) => (
-              <MenuItem key={language.value} value={language.value}>
-                {language.label}
+              <MenuItem key={language.label} value={language.label}>
+                {language.value}
               </MenuItem>
             ))}
           </TextField>
