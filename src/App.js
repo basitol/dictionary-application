@@ -22,7 +22,7 @@ function App() {
   const dictionaryApi = async () => {
     try {
       const data = await axios.get(
-        "https://api.dictionaryapi.dev/api/v2/entries/en/plane"
+        `https://api.dictionaryapi.dev/api/v2/entries/${category}/${words}`
       );
       setMeanings(data.data);
     } catch (error) {
@@ -34,7 +34,9 @@ function App() {
 
   useEffect(() => {
     dictionaryApi();
-  }, []);
+    // eslint-disable-next-line
+  }, [words, category]);
+
   return (
     <div
       className="App"
