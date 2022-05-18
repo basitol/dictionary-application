@@ -3,6 +3,7 @@ import { createTheme } from "@mui/system";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./App.css";
+import Definitions from "./Components/Definitions/Definitions";
 import Header from "./Components/Header/Header";
 
 const darkTheme = createTheme({
@@ -53,6 +54,7 @@ function App() {
           words={words}
           setWords={setWords}
         />
+        <Definitions />
       </Container>
     </div>
   );
