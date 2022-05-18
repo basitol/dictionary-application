@@ -17,8 +17,8 @@ const Header = ({ category, setCategory, words, setWords }) => {
     },
   });
 
-  const handleChange = (language) => {
-    setCategory(language);
+  const handleChange = (e) => {
+    setCategory(e.target.value);
     setWords("");
   };
 
@@ -40,7 +40,7 @@ const Header = ({ category, setCategory, words, setWords }) => {
             className="select"
             label="Language"
             value={category}
-            onChange={(e) => handleChange(e.target.value)}
+            onChange={(e) => handleChange(e)}
           >
             {languages.map((language) => (
               <MenuItem key={language.label} value={language.label}>
