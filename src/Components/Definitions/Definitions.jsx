@@ -5,6 +5,19 @@ const Definitions = ({ meanings, words, category }) => {
   return (
     <div className="definitions">
       <div className="meanings">
+        {words && category === "en" && meanings[0] && (
+          <audio
+            src={meanings[0].phonetics[0] && meanings[0].phonetics[0].audio}
+            style={{
+              backgroundColor: "#fff",
+              borderRadius: "10px",
+              width: "100%",
+            }}
+            controls
+          >
+            Your browser does not support the <code>audio</code> element.
+          </audio>
+        )}
         {words === "" ? (
           <span className="subTitle">Start by typing a word</span>
         ) : (
