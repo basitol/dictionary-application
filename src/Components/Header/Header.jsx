@@ -1,14 +1,15 @@
 import {
   TextField,
-  createMuiTheme,
+  // createMuiTheme,
   ThemeProvider,
   MenuItem,
 } from "@material-ui/core";
+import { createTheme } from "@material-ui/core/styles";
 import { languages } from "../../data";
 import "./Header.css";
 
 const Header = ({ category, setCategory, words, setWords }) => {
-  const darkTheme = createMuiTheme({
+  const darkTheme = createTheme({
     palette: {
       mode: "dark",
       text: {
@@ -24,7 +25,7 @@ const Header = ({ category, setCategory, words, setWords }) => {
 
   return (
     <div className="header">
-      <h1 className="title">{words ? words : "Dictionary"}</h1>
+      <h1 className="title">{"Dictionary"}</h1>
       <div className="inputs">
         <ThemeProvider theme={darkTheme}>
           <TextField
@@ -50,6 +51,7 @@ const Header = ({ category, setCategory, words, setWords }) => {
           </TextField>
         </ThemeProvider>
       </div>
+      <p>{words ? words : "Typed Word"}</p>
     </div>
   );
 };
