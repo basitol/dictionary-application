@@ -1,7 +1,7 @@
 import React from "react";
 import "./Definitions.css";
 
-const Definitions = ({ meanings, words, category }) => {
+const Definitions = ({ meanings, words, category, lightMode }) => {
   return (
     <div className="definitions">
       <div className="meanings">
@@ -9,8 +9,7 @@ const Definitions = ({ meanings, words, category }) => {
           <audio
             src={meanings[0].phonetics[0] && meanings[0].phonetics[0].audio}
             style={{
-              backgroundColor: "#fff",
-              borderRadius: "10px",
+              borderRadius: "35px",
               width: "100%",
             }}
             controls
@@ -23,37 +22,35 @@ const Definitions = ({ meanings, words, category }) => {
         ) : (
           meanings.map((meaning) =>
             meaning.meanings.map((item) =>
-              item.definitions.map(
-                (def) => (
-                  console.log(def),
-                  (
-                    <div
-                      className="definition"
-                      style={{ color: "#000", backgroundColor: "#fff" }}
-                    >
-                      <b>{def.definition}</b>
-                      <hr
-                        style={{
-                          backgroundColor: "black",
-                          width: "100%",
-                          height: "1px",
-                        }}
-                      />
-                      {def.example && (
-                        <span>
-                          <b>Example : </b> {def.example}
-                        </span>
-                      )}
-                      {def.synonyms.length > 0 && (
-                        <span>
-                          <b>Synonyms : </b>
-                          {def.synonyms.map((synonym) => `${synonym},`)}
-                        </span>
-                      )}
-                    </div>
-                  )
-                )
-              )
+              item.definitions.map((def) => (
+                <div
+                  className="definition"
+                  style={{
+                    color: lightMode ? "#fff" : "#000",
+                    backgroundColor: lightMode ? "#778693" : "#fff",
+                  }}
+                >
+                  <b>{def.definition}</b>
+                  <hr
+                    style={{
+                      backgroundColor: "black",
+                      width: "100%",
+                      height: "1px",
+                    }}
+                  />
+                  {def.example && (
+                    <span>
+                      <b>Example : </b> {def.example}
+                    </span>
+                  )}
+                  {def.synonyms.length > 0 && (
+                    <span>
+                      <b>Synonyms : </b>
+                      {def.synonyms.map((synonym) => `${synonym},`)}
+                    </span>
+                  )}
+                </div>
+              ))
             )
           )
         )}
