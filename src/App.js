@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Definitions from "./Components/Definitions/Definitions";
 import Header from "./Components/Header/Header";
+import SwitchToggle from "./Components/Switch/Switch";
 
 const darkTheme = createTheme({
   palette: {
@@ -19,6 +20,7 @@ function App() {
   const [meanings, setMeanings] = useState([]);
   const [words, setWords] = useState(""); // words is an array of objects
   const [category, setCategory] = useState("en");
+  const [lightMode, setLightMode] = useState(false);
 
   const dictionaryApi = async () => {
     try {
@@ -31,7 +33,9 @@ function App() {
     }
   };
 
-  console.log(meanings);
+  const handleChange = () => {
+    setLightMode(!lightMode);
+  };
 
   useEffect(() => {
     dictionaryApi();
@@ -41,20 +45,38 @@ function App() {
   return (
     <div
       className="App"
-      style={{ backgroundColor: "#222", height: "100vh", color: "#fff" }}
+      style={{
+        backgroundColor: lightMode ? "#F3F6F9" : "#222",
+        height: "100vh",
+        color: lightMode ? "#778693" : "#fff",
+        transition: "all 0.5s ease-in-out",
+      }}
       theme={darkTheme}
     >
       <Container
         maxWidth="md"
-        style={{ display: "flex", flexDirection: "column", height: "100vh" }}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          height: "100vh",
+          position: "relative",
+        }}
       >
         <Header
           category={category}
           setCategory={setCategory}
           words={words}
           setWords={setWords}
+          checked={lightMode}
+          onChange={handleChange}
         />
-        <Definitions />
+
+        <Definitions
+          words={words}
+          meanings={meanings}
+          category={category}
+          lightMode={lightMode}
+        />
       </Container>
     </div>
   );
